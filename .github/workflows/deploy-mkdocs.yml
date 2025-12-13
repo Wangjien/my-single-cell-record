@@ -1,20 +1,36 @@
-name: Deploy MkDocs via SSH
+name: Deploy MkDocs to GitHub Pages
+
+# 触发条件：main 分支有 push/PR 合并时执行
 on:
   push:
-    branches: [ master ]
-  workflow_dispatch:
+    branches: [ main ]  # 若你的主分支是 master，替换为 master
+  pull_request:
+    branches: [ main ]
+  # workflow_dispatch:  # 额外加手动触发，方便调试
+# 定义任务
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 使用 Ubuntu 系统运行
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      # 步骤 1：拉取仓库代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 步骤 2：设置 Python 环境（MkDocs 依赖 Python）
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - run: pip install mkdocs mkdocs-material
-      - run: mkdocs build
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          ssh_key: SINGLECELL_TOKEN
-          publish_dir: ./site
-          repo: git@github.com:Wangjien/my-single-cell-record.git
+          python-version: "3.11"  # 指定 Python 版本（3.8+ 均可）
+
+      # 步骤 3：安装 MkDocs 及依赖（如 Material 主题）
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material  # 按需添加其他插件（如 mkdocs-static-i18n）
+
+      # 步骤 4：构建并部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force  # --force 强制覆盖 gh-pages 分支
+        env:
+          # 自动使用 GitHub 内置的 Token 授权推送
+          GITHUB_TOKEN: SINGLECELL_TOKEN
