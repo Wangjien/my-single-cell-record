@@ -37,6 +37,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4  # 替代mkdocs gh-deploy，自动处理权限
         with:
-          github_token: singlecell_token  # 正确引用Secrets中的令牌
+          github_token: SINGLECELL_TOKEN  # 正确引用Secrets中的令牌
           publish_dir: ./site  # MkDocs编译后的静态文件目录
           force_orphan: true  # 强制覆盖gh-pages分支，避免历史冲突
