@@ -8,4 +8,4 @@ For more professional single cell analysis resources, visit:
 - [Scanpy Official Docs](https://scanpy.readthedocs.io)
 - [Seurat Official Docs](https://satijalab.org/seurat)
 
-![单细胞组学首页封面](../imgs/index.png "Single Cell Omics Cover")
+![单细胞组学首页封面](imgs/index.png "Single Cell Omics Cover")
