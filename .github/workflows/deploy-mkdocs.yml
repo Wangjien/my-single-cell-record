@@ -1,36 +1,42 @@
 name: Deploy MkDocs to GitHub Pages
 
-# 触发条件：main 分支有 push/PR 合并时执行
+# 仅保留push触发+手动触发（删除PR触发，避免权限坑）
 on:
   push:
-    branches: [ master ]  # 若你的主分支是 master，替换为 master
-  pull_request:
     branches: [ master ]
-  # workflow_dispatch:  # 额外加手动触发，方便调试
-# 定义任务
+  workflow_dispatch:  # 启用手动触发，方便调试
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # 使用 Ubuntu 系统运行
+    runs-on: ubuntu-latest
+    # 关键：显式授予GITHUB_TOKEN推送权限
+    permissions:
+      contents: write  # 允许推送分支
+      pages: write     # 允许操作Pages
+      id-token: write
+
     steps:
-      # 步骤 1：拉取仓库代码
+      # 步骤1：拉取代码（需拉全历史，避免MkDocs编译异常）
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 必须：拉取所有提交历史
 
-      # 步骤 2：设置 Python 环境（MkDocs 依赖 Python）
+      # 步骤2：配置Python环境
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"  # 指定 Python 版本（3.8+ 均可）
+          python-version: "3.11"
 
-      # 步骤 3：安装 MkDocs 及依赖（如 Material 主题）
+      # 步骤3：安装依赖（确保Material主题生效）
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mkdocs mkdocs-material  # 按需添加其他插件（如 mkdocs-static-i18n）
+          pip install mkdocs mkdocs-material
 
-      # 步骤 4：构建并部署到 GitHub Pages
+      # 步骤4：部署（改用内置GITHUB_TOKEN，无需手动令牌）
       - name: Deploy to GitHub Pages
-        run: mkdocs gh-deploy --force  # --force 强制覆盖 gh-pages 分支
+        run: mkdocs gh-deploy --force
         env:
-          # 自动使用 GitHub 内置的 Token 授权推送
+          # 正确引用GitHub内置令牌（无需手动配置Secrets）
           GITHUB_TOKEN: SINGLECELL_TOKEN
