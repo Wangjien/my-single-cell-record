@@ -1,42 +1,20 @@
-name: Deploy MkDocs to GitHub Pages
-
-# 触发条件：仅 master 分支推送/手动触发（删除PR触发，避免权限问题）
+name: Deploy MkDocs via SSH
 on:
   push:
     branches: [ master ]
-  workflow_dispatch:  # 启用手动触发，方便调试
-
-# 定义部署任务
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # 步骤1：拉取仓库代码（必须拉取完整历史，解决MkDocs编译异常）
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # 拉取全部提交历史，避免编译时缺失信息
-
-      # 步骤2：配置Python环境
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      # 步骤3：安装MkDocs及依赖（确保Material主题生效）
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install mkdocs mkdocs-material
-
-      # 步骤4：先编译验证（避免部署空文件）
-      - name: Build MkDocs static site
-        run: mkdocs build  # 仅编译，验证无语法错误
-
-      # 步骤5：部署到GitHub Pages（改用可靠插件，解决权限问题）
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4  # 替代mkdocs gh-deploy，自动处理权限
+      - run: pip install mkdocs mkdocs-material
+      - run: mkdocs build
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: SINGLECELL_TOKEN  # 正确引用Secrets中的令牌
-          publish_dir: ./site  # MkDocs编译后的静态文件目录
-          force_orphan: true  # 强制覆盖gh-pages分支，避免历史冲突
+          ssh_key: ${{ secrets.GITHUB_SSH_PRIVATE_KEY }}
+          publish_dir: ./site
+          repo: git@github.com:Wangjien/my-single-cell-record.git
