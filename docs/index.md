@@ -1,17 +1,11 @@
-# Welcome to MkDocs
+# Welcome to Single Cell Omics Docs
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This is a comprehensive documentation site for single cell omics analysis, covering core technologies (scRNA-seq, scATAC-seq, etc.), analysis workflows, and practical tutorials.
 
-## Commands
+For more professional single cell analysis resources, visit:
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+- [Single Cell Portal (Broad Institute)](https://singlecell.broadinstitute.org)
+- [Scanpy Official Docs](https://scanpy.readthedocs.io)
+- [Seurat Official Docs](https://satijalab.org/seurat)
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+![单细胞组学首页封面](../imgs/index.png "Single Cell Omics Cover")
