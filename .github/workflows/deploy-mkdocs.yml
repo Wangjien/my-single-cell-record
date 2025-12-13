@@ -15,6 +15,6 @@ jobs:
       - run: mkdocs build
       - uses: peaceiris/actions-gh-pages@v4
         with:
-          ssh_key: ${{ secrets.GITHUB_SSH_PRIVATE_KEY }}
+          ssh_key: SINGLECELL_TOKEN
           publish_dir: ./site
           repo: git@github.com:Wangjien/my-single-cell-record.git
