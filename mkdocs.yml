@@ -1,0 +1,27 @@
+site_name: Single Cell Record by Noah
+# 补充站点描述（可选，会显示在页面标题/SEO 中）
+site_description: A documentation site for Single Cell Record by Noah
+# 补充站点语言（默认英文，如需中文可设 zh）
+site_lang: en
+# 补充仓库链接（可选，会显示在页面底部）
+repo_url: https://github.com/wangjien/my-single-cell-record  # 替换为实际地址
+# repo_name: Noah/SingleCellRecord
+
+nav:
+  # - Home: index.md
+  # - Tutorials:
+  #     - Tutorial 1: tutorials/tutorial1.md
+  #     - Tutorial 2: tutorials/tutorial2.md
+  # - API Reference: api_reference.md
+  # - About: about.md
+  - scRNA-seq: scRNA-seq.md
+  - scATAC-seq: scATAC-seq.md
+  - 空转: 空转.md
+
+theme: readthedocs
+
+# 补充：开启目录折叠（readthedocs 主题支持）
+markdown_extensions:
+  - toc:
+      permalink: true  # 为目录标题添加锚点链接
+      toc_depth: 3     # 目录深度
