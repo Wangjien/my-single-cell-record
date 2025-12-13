@@ -3,9 +3,9 @@ name: Deploy MkDocs to GitHub Pages
 # 触发条件：main 分支有 push/PR 合并时执行
 on:
   push:
-    branches: [ main ]  # 若你的主分支是 master，替换为 master
+    branches: [ master ]  # 若你的主分支是 master，替换为 master
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
   # workflow_dispatch:  # 额外加手动触发，方便调试
 # 定义任务
 jobs:
