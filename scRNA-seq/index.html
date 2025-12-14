@@ -46,8 +46,6 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#cellranger-count_1">cellranger count下载和安装</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#cellranger-count_2">cellranger count使用的参考文件下载</a>
-    </li>
         </ul>
     </li>
     </ul>
@@ -96,6 +94,58 @@
 <p><code>cellranger count</code> 是 10x Genomics 官方用于<strong>单细胞 RNA-seq（scRNA-seq）数据定量分析</strong>的核心命令，主要功能是将单细胞测序的原始 fastq 文件与参考基因组比对，生成细胞级别的基因表达矩阵。</p>
 <h3 id="cellranger-count_1">cellranger count下载和安装<a class="headerlink" href="#cellranger-count_1" title="Permanent link">&para;</a></h3>
 <p>目前的cellranger版本已经更新到了Cell Ranger 10.0.0 (Nov 13, 2025)，如果需要下载历史版本，可以通过访问<a href="https://www.10xgenomics.com/support/software/cell-ranger/downloads/previous-versions">https://www.10xgenomics.com/support/software/cell-ranger/downloads/previous-versions</a>进行下载。<strong>参考数据整体比较大，如果服务器下载速度过慢，也可以本地下载，并上传至服务器。</strong></p>
+<h1 id="cell-ranger-v700-v1000">Cell Ranger 各版本核心变化对比表（v7.0.0 至 v10.0.0）<a class="headerlink" href="#cell-ranger-v700-v1000" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>发布时间</th>
+<th>核心功能/优化</th>
+<th>兼容性/支持要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>v10.0.0</strong></td>
+<td>2025-05</td>
+<td>1. 新增“多组学联合聚类”功能，整合基因表达、ATAC、蛋白数据联合分析2. 支持Gem-X Ultra芯片及8-plex高 multiplexing 文库3. 优化CRISPR筛选富集分析，提升基因效应量化精度4. UMAP降维速度较v9提升40%，大样本分析效率显著提升5. web summary新增“多组学关联视图”</td>
+<td>1. 支持2025-A版参考基因组（GRCh38/GRCm39注释更新）2. 兼容PTG抗体v2版蛋白文库3. 系统要求：Python 3.11+，CPU支持AVX2，内存≥64GB（100k细胞）4. 兼容Illumina NovaSeq X Plus最新数据</td>
+</tr>
+<tr>
+<td>v9.0.0</td>
+<td>2024-11</td>
+<td>1. 支持Gem-X Universal芯片OCM技术，适配4-plex 3' v4/5' v3文库2. 新增<code>cell ranger annotate</code>命令，实现自动化细胞类型注释3. aggr流程默认降维改为UMAP，速度提升2.5倍4. 内置Clonotype分组功能，简化免疫组库分析5. 优化VDJ文库比对逻辑，提升TCRBCR组装准确性</td>
+<td>1. 支持2024-A版参考基因组2. 系统要求：CPU支持AVX，Python 3.10+3. 兼容3' v4、5' v3、VDJ v2等文库4. 支持CentOS 8、Ubuntu 20.04/22.04</td>
+</tr>
+<tr>
+<td>v8.0.0</td>
+<td>2024-03</td>
+<td>1. 首次支持Gem-X系列3' v4和5' v3文库，低丰度基因检出率提升15%2. 新增<code>min-crispr-umi</code>参数，自定义CRISPR guide计数阈值3. 优化HT文库EmptyDrops过滤，提升高细胞量样本检出准确性4. 蛋白分析新增“抗体批次校正”选项</td>
+<td>1. 支持PTG抗体蛋白表达文库分析2. 实验性支持固定RNA样本CRISPR文库分析3. 系统要求：Python 3.9+，内存≥32GB（30k细胞）4. 兼容NextSeq 20005500数据</td>
+</tr>
+<tr>
+<td>v8.0.1</td>
+<td>2024-05</td>
+<td>1. 修复<code>--force-cells</code>参数匹配时报错问题2. 调整HT文库EmptyDrops背景范围至80k-160k，需手动指定文库类型3. 修复参考基因组无转录本注释导致的矩阵错误4. 优化web summary分群图表渲染速度</td>
+<td>1. 完善HT文库兼容性，需指定<code>--chemistry=chromium-ht-v3</code>等参数2. 修复自定义参考基因组兼容性问题3. 继承v8.0.0系统要求和文库支持范围</td>
+</tr>
+<tr>
+<td>v7.2.0</td>
+<td>2023-10</td>
+<td>1. 新增“抗体背景校正”功能，优化蛋白定量结果2. ATAC分析新增“peak注释增强”模块，整合调控区域信息3. count流程内存占用降低20%4. 优化TCRBCR体细胞突变检测，提升TIL克隆分析准确性</td>
+<td>1. 支持2023-B版参考基因组（更新HLA及小鼠免疫基因注释）2. 兼容3' v3.1、5' v2、VDJ v1.1等文库3. 系统要求：Python 3.9+，支持CentOS 7/8、Ubuntu 18.04/20.044. 支持NovaSeq 6000数据</td>
+</tr>
+<tr>
+<td>v7.0.0</td>
+<td>2023-06</td>
+<td>1. 支持NextSeq X Plus高产出数据（单样本达100Gb）2. 新增“批次效应可视化”模块3. 优化CRISPR guide比对效率，减少脱靶误判4. 简化多样本整合流程，aggr命令自动读取多count结果</td>
+<td>1. 支持GemCode HT文库，适配最高100k细胞样本2. 弃用Python 3.7，要求Python 3.8+3. 内存要求：≥16GB（10k细胞），≥48GB（50k细胞）4. 不兼容v2系列旧文库</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 说明：表格内容基于10x Genomics官方发布日志整理，实验性功能可能后续调整，实际使用请参考对应版本官方文档。</p>
+</blockquote>
 <div class="language-pwsh highlight"><pre><span></span><code><span class="c">## 这里下载的时Cell Ranger 10.0.0版本</span>
 <span class="c"># 命令行使用curl下载</span>
 <span class="nb">curl </span><span class="n">-o</span> <span class="n">cellranger</span><span class="p">-</span><span class="n">10</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="s2">&quot;https://cf.10xgenomics.com/releases/cell-exp/cellranger-10.0.0.tar.gz?Expires=1765682198&amp;Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&amp;Signature=SO3tn4o50UYUViprsueJpWGbkOLqzAUxH8X4fbKgtr4LxexzQFLWWc~Og9I3AUpOKrntOLVFd0TTfJ63X5EuM2jl5fwLvMPVDg2Mh4liM0Lp87qzhyY6TsxdJkRs3UuMlelp3rc2ZATBG9O5yfo-Urxgx-dY5jsnpldy0hKg58XGe8-r6CGmOI1CzGAF4qpiCgJOzRbONK7QHDFTYcKey6Xmh7PT~KPRip24kUcKiJyJzyfhGNdfSACJbJgA02kLEBb2EmZasQFvfRoY0NPMFlnVpFkIv7-p73JA~CiYERWT0awbwdkPn7n7eXItlVktXA3Z2QwiT~DJfsc8eKC2rA__&quot;</span>
@@ -113,13 +163,16 @@
 <span class="nb">echo </span><span class="s2">&quot;export PATH=</span><span class="p">$(</span><span class="n">pwd</span><span class="p">)</span><span class="s2">:$PATH&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">~/.</span><span class="n">bashrc</span> <span class="p">&amp;&amp;</span> <span class="n">source</span> <span class="p">~/.</span><span class="n">bashrc</span> 
 <span class="c"># 如果服务器中使用的是zsh，则执行如下命令</span>
 <span class="nb">echo </span><span class="s2">&quot;export PATH=</span><span class="p">$(</span><span class="n">pwd</span><span class="p">)</span><span class="s2">:$PATH&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">~/.</span><span class="n">zshrc</span> <span class="p">&amp;&amp;</span> <span class="n">source</span> <span class="p">~/.</span><span class="n">zshrc</span>
+
+<span class="c"># 验证安装成功</span>
+<span class="n">cellranger</span> <span class="p">-</span><span class="n">-version</span>
 </code></pre></div>
 <h3 id="cellranger-count_2">cellranger count使用的参考文件下载<a class="headerlink" href="#cellranger-count_2" title="Permanent link">&para;</a></h3>
 <p>目前cellranger count使用的参数文件也做了更新，目前的版本为:2024-A，历史版本为：2020-A（<a href="https://www.10xgenomics.com/support/software/cell-ranger/latest/release-notes/cr-reference-release-notes#2020-a">https://www.10xgenomics.com/support/software/cell-ranger/latest/release-notes/cr-reference-release-notes#2020-a</a>）。</p>
 <ul>
 <li>Human reference (GRCh38) - 2024-A</li>
 </ul>
-<div class="language-Powershell highlight"><pre><span></span><code><span class="c"># wget 下载</span>
+<div class="language-pwsh highlight"><pre><span></span><code><span class="c"># wget 下载</span>
 <span class="nb">wget </span><span class="s2">&quot;https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz&quot;</span>
 
 <span class="c"># curl 下载</span>
@@ -128,7 +181,7 @@
 <ul>
 <li>Mouse reference (GRCm39) - 2024-A</li>
 </ul>
-<div class="language-Powershell highlight"><pre><span></span><code><span class="c"># wget下载</span>
+<div class="language-pwsh highlight"><pre><span></span><code><span class="c"># wget下载</span>
 <span class="nb">wget </span><span class="s2">&quot;https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCm39-2024-A.tar.gz&quot;</span>
 
 <span class="c"># curl 下载</span>
@@ -137,7 +190,7 @@
 <ul>
 <li>Rat reference (mRatBN7.2) - 2024-A</li>
 </ul>
-<div class="language-Powershell highlight"><pre><span></span><code><span class="c"># wget下载</span>
+<div class="language-pwsh highlight"><pre><span></span><code><span class="c"># wget下载</span>
 <span class="nb">wget </span><span class="s2">&quot;https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-mRatBN7-2-2024-A.tar.gz&quot;</span>
 
 <span class="c"># curl下载</span>
