@@ -14,8 +14,7 @@
 ### cellranger count下载和安装
 
 目前的cellranger版本已经更新到了Cell Ranger 10.0.0 (Nov 13, 2025)，如果需要下载历史版本，可以通过访问[https://www.10xgenomics.com/support/software/cell-ranger/downloads/previous-versions](https://www.10xgenomics.com/support/software/cell-ranger/downloads/previous-versions)进行下载。**参考数据整体比较大，如果服务器下载速度过慢，也可以本地下载，并上传至服务器。**
-# Cell Ranger 各版本核心变化对比表（v7.0.0 至 v10.0.0）
-
+### Cell Ranger 各版本核心变化对比表（v7.0.0 至 v10.0.0）
 | 版本       | 发布时间   | 核心功能/优化                                                                 | 兼容性/支持要求                                                                 |
 |------------|------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
 | **v10.0.0** | 2025-05    | 1. 新增“多组学联合聚类”功能，整合基因表达、ATAC、蛋白数据联合分析2. 支持Gem-X Ultra芯片及8-plex高 multiplexing 文库3. 优化CRISPR筛选富集分析，提升基因效应量化精度4. UMAP降维速度较v9提升40%，大样本分析效率显著提升5. web summary新增“多组学关联视图” | 1. 支持2025-A版参考基因组（GRCh38/GRCm39注释更新）2. 兼容PTG抗体v2版蛋白文库3. 系统要求：Python 3.11+，CPU支持AVX2，内存≥64GB（100k细胞）4. 兼容Illumina NovaSeq X Plus最新数据 |
