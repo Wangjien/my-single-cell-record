@@ -91,3 +91,29 @@ curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-mRatBN7-2-2024-A.t
 # 选择一种下载方式，下载成功后解压文件
 tar -xzf refdata-gex-mRatBN7-2-2024-A.tar.gz
 ```
+### cellranger count使用
+<font color="blue"> 这里使用cellranger官方提供的示例数据，数据下载地址[https://www.10xgenomics.com/support/software/cell-ranger/8.0/tutorials/cr-tutorial-ct](https://www.10xgenomics.com/support/software/cell-ranger/8.0/tutorials/cr-tutorial-ct) </font>
+```pwsh
+mkdir run_cellranger_count && cd run_cellranger_count
+wget https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_v3/pbmc_1k_v3_fastqs.tar
+# 解包
+tar -xvf pbmc_1k_v3_fastqs.tar
+
+# 解包后的数据格式
+#pbmc_1k_v3_fastqs/
+#pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L001_R2_001.fastq.gz
+#pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L002_I1_001.fastq.gz
+#pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L001_R1_001.fastq.gz
+#pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L002_R1_001.fastq.gz
+#pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L002_R2_001.fastq.gz
+#pbmc_1k_v3_fastqs/pbmc_1k_v3_S1_L001_I1_001.fastq.gz
+```
+**<font color="red">celkanger count在使用的时候需要提前对fastq数据进行命名，命名的格式必须官方给的格式，否则会报错。</font>**
+[样本名]_S[样本编号]_L[泳道号]_R[读段类型]_001.fastq.gz，例如：Sample_S1_L00X_R1_001.fastq.gz， Lane 1: **L001** and Lane 2: **L002**.
+| 字段          | 说明                                                                 | 示例                |
+|---------------|----------------------------------------------------------------------|---------------------|
+| `[样本名]`    | 自定义样本标识（如 sample1、PBMC_001），需唯一且不含特殊字符         | `PBMC_10k`          |
+| `S[样本编号]` | 样本在测序批次中的编号（数字，如 S1、S2），可省略但建议保留           | `S1`                |
+| `L[泳道号]`   | 测序仪的泳道号（数字，如 L001、L002），多泳道数据需区分               | `L001`              |
+| `R[读段类型]` | 关键！区分不同读段：<br>R1：样本索引/条码读段（通常 8/10bp）<br> R2：基因表达读段（通常 98bp） | `R1` / `R2`         |
+| `001`         | 固定后缀（Illumina 标准，代表测序循环编号），不可修改                 | `001`               |
