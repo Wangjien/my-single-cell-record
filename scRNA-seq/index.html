@@ -176,20 +176,25 @@
 <ul>
 <li>Human reference (GRCh38) - 2024-A</li>
 </ul>
-<div class="language-pwsh highlight"><pre><span></span><code><span class="c"># wget 下载</span>
+<p><div class="language-pwsh highlight"><pre><span></span><code><span class="c"># wget 下载</span>
 <span class="nb">wget </span><span class="s2">&quot;https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz&quot;</span>
 
 <span class="c"># curl 下载</span>
 <span class="nb">curl </span><span class="n">-O</span> <span class="s2">&quot;https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz&quot;</span>
+<span class="c"># 选择一种下载方式，下载成功后解压文件</span>
+<span class="n">tar</span> <span class="n">-xzf</span> <span class="n">refdata-gex-GRCh38</span><span class="p">-</span><span class="n">2024-A</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
 </code></pre></div>
-<ul>
-<li>Mouse reference (GRCm39) - 2024-A</li>
-</ul>
+解压后的文件目录中包括如下的文件
+<img alt="" src="../imgs/huamn_cellranger_ref.png" />
+<img alt="human" src="../imgs/huamn_cellranger_ref2.png" />
+* Mouse reference (GRCm39) - 2024-A</p>
 <div class="language-pwsh highlight"><pre><span></span><code><span class="c"># wget下载</span>
 <span class="nb">wget </span><span class="s2">&quot;https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCm39-2024-A.tar.gz&quot;</span>
 
 <span class="c"># curl 下载</span>
 <span class="nb">curl </span><span class="n">-O</span> <span class="s2">&quot;https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCm39-2024-A.tar.gz&quot;</span>
+<span class="c"># 选择一种下载方式，下载成功后解压文件</span>
+<span class="n">tar</span> <span class="n">-xzf</span> <span class="n">refdata-gex-GRCm39</span><span class="p">-</span><span class="n">2024-A</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
 </code></pre></div>
 <ul>
 <li>Rat reference (mRatBN7.2) - 2024-A</li>
@@ -199,6 +204,8 @@
 
 <span class="c"># curl下载</span>
 <span class="nb">curl </span><span class="n">-O</span> <span class="s2">&quot;https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-mRatBN7-2-2024-A.tar.gz&quot;</span>
+<span class="c"># 选择一种下载方式，下载成功后解压文件</span>
+<span class="n">tar</span> <span class="n">-xzf</span> <span class="n">refdata-gex-mRatBN7</span><span class="p">-</span><span class="n">2</span><span class="p">-</span><span class="n">2024-A</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
 </code></pre></div>
               
             </div>
