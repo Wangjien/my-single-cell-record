@@ -2,6 +2,7 @@
  * @Author: wangje
  * @Date: 2025-12-13 21:56:05
 -->
+
 # 10X 分析工具CellRanger学习
 
 ## cellranger count
@@ -14,7 +15,7 @@
 
 目前的cellranger版本已经更新到了Cell Ranger 10.0.0 (Nov 13, 2025)，如果需要下载历史版本，可以通过访问[https://www.10xgenomics.com/support/software/cell-ranger/downloads/previous-versions](https://www.10xgenomics.com/support/software/cell-ranger/downloads/previous-versions)进行下载。**参考数据整体比较大，如果服务器下载速度过慢，也可以本地下载，并上传至服务器。**
 
-```powershell
+```pwsh
 ## 这里下载的时Cell Ranger 10.0.0版本
 # 命令行使用curl下载
 curl -o cellranger-10.0.0.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-10.0.0.tar.gz?Expires=1765682198&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=SO3tn4o50UYUViprsueJpWGbkOLqzAUxH8X4fbKgtr4LxexzQFLWWc~Og9I3AUpOKrntOLVFd0TTfJ63X5EuM2jl5fwLvMPVDg2Mh4liM0Lp87qzhyY6TsxdJkRs3UuMlelp3rc2ZATBG9O5yfo-Urxgx-dY5jsnpldy0hKg58XGe8-r6CGmOI1CzGAF4qpiCgJOzRbONK7QHDFTYcKey6Xmh7PT~KPRip24kUcKiJyJzyfhGNdfSACJbJgA02kLEBb2EmZasQFvfRoY0NPMFlnVpFkIv7-p73JA~CiYERWT0awbwdkPn7n7eXItlVktXA3Z2QwiT~DJfsc8eKC2rA__"
@@ -33,10 +34,13 @@ echo "export PATH=$(pwd):$PATH" >> ~/.bashrc && source ~/.bashrc
 # 如果服务器中使用的是zsh，则执行如下命令
 echo "export PATH=$(pwd):$PATH" >> ~/.zshrc && source ~/.zshrc
 ```
+
 ### cellranger count使用的参考文件下载
+
 目前cellranger count使用的参数文件也做了更新，目前的版本为:2024-A，历史版本为：2020-A（[https://www.10xgenomics.com/support/software/cell-ranger/latest/release-notes/cr-reference-release-notes#2020-a](https://www.10xgenomics.com/support/software/cell-ranger/latest/release-notes/cr-reference-release-notes#2020-a)）。
-  
+
 * Human reference (GRCh38) - 2024-A
+
 ```Powershell
 # wget 下载
 wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
@@ -44,7 +48,9 @@ wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
 # curl 下载
 curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
 ```
+
 * Mouse reference (GRCm39) - 2024-A
+
 ```Powershell
 # wget下载
 wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCm39-2024-A.tar.gz"
@@ -52,7 +58,9 @@ wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCm39-2024-A.tar.gz"
 # curl 下载
 curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCm39-2024-A.tar.gz"
 ```
+
 * Rat reference (mRatBN7.2) - 2024-A
+
 ```Powershell
 # wget下载
 wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-mRatBN7-2-2024-A.tar.gz"

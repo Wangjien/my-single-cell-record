@@ -22,6 +22,9 @@ theme: readthedocs
 
 # 补充：开启目录折叠（readthedocs 主题支持）
 markdown_extensions:
+  - pymdownx.highlight:  # 启用代码高亮
+      pygments_lang_class: true  # 支持语言标识
+  - pymdownx.superfences:  # 支持代码块嵌套等高级功能
   - toc:
       permalink: true  # 为目录标题添加锚点链接
       toc_depth: 3     # 目录深度
