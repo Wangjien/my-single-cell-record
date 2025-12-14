@@ -62,8 +62,12 @@ wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
 
 # curl 下载
 curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
+# 选择一种下载方式，下载成功后解压文件
+tar -xzf refdata-gex-GRCh38-2024-A.tar.gz
 ```
-
+解压后的文件目录中包括如下的文件
+![](./imgs/huamn_cellranger_ref.png)
+![human](./imgs/huamn_cellranger_ref2.png)
 * Mouse reference (GRCm39) - 2024-A
 
 ```pwsh
@@ -72,6 +76,8 @@ wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCm39-2024-A.tar.gz"
 
 # curl 下载
 curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCm39-2024-A.tar.gz"
+# 选择一种下载方式，下载成功后解压文件
+tar -xzf refdata-gex-GRCm39-2024-A.tar.gz
 ```
 
 * Rat reference (mRatBN7.2) - 2024-A
@@ -82,4 +88,6 @@ wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-mRatBN7-2-2024-A.tar.
 
 # curl下载
 curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-mRatBN7-2-2024-A.tar.gz"
+# 选择一种下载方式，下载成功后解压文件
+tar -xzf refdata-gex-mRatBN7-2-2024-A.tar.gz
 ```
