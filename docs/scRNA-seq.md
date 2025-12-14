@@ -29,14 +29,14 @@ tar -xzf cellranger-10.0.0.tar.gz
 ### cellranger count使用的参考文件下载
 目前cellranger count使用的参数文件也做了更新，目前的版本为:2024-A，历史版本为：2020-A（[https://www.10xgenomics.com/support/software/cell-ranger/latest/release-notes/cr-reference-release-notes#2020-a](https://www.10xgenomics.com/support/software/cell-ranger/latest/release-notes/cr-reference-release-notes#2020-a)）。
   
-  * Human reference (GRCh38) - 2024-A
-  ```Powershell
-  # wget 下载
-  wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
-  
-  # curl 下载
-  curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
- ```
+* Human reference (GRCh38) - 2024-A
+```Powershell
+# wget 下载
+wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
+
+# curl 下载
+curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
+```
 * Mouse reference (GRCm39) - 2024-A
 ```Powershell
 # wget下载
