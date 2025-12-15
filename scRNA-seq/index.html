@@ -259,8 +259,91 @@
 <td>固定后缀（Illumina 标准，代表测序循环编号），不可修改</td>
 <td><code>001</code></td>
 </tr>
+<tr>
+<td>cellranger count常用参数：</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>参数</td>
+<td>简写示例</td>
+<td>作用</td>
+</tr>
+<tr>
+<td>-------------------</td>
+<td>---------------------</td>
+<td>---------------------------------</td>
+</tr>
+<tr>
+<td><code>--id</code></td>
+<td><code>--id=pbmc1k</code></td>
+<td>输出文件夹名（必填）</td>
+</tr>
+<tr>
+<td><code>--transcriptome</code></td>
+<td><code>--trans=/ref/GRCh38</code></td>
+<td>参考索引路径（必填）</td>
+</tr>
+<tr>
+<td><code>--fastqs</code></td>
+<td><code>--fastqs=./fastq</code></td>
+<td>fastq 所在目录（必填）</td>
+</tr>
+<tr>
+<td><code>--sample</code></td>
+<td><code>--sample=pbmc1k</code></td>
+<td>文件前缀，多 lane/多 Index 时必填</td>
+</tr>
+<tr>
+<td><code>--expect-cells</code></td>
+<td><code>--expect-cells=3000</code></td>
+<td>预期细胞数，提高 calling 精度</td>
+</tr>
+<tr>
+<td><code>--force-cells</code></td>
+<td><code>--force-cells=3500</code></td>
+<td>强制细胞数，跳过自动 calling</td>
+</tr>
+<tr>
+<td><code>--include-introns</code></td>
+<td>开关</td>
+<td>snRNA-seq 核内信号需打开</td>
+</tr>
+<tr>
+<td><code>--localcores</code></td>
+<td><code>--localcores=16</code></td>
+<td>最大 CPU 数</td>
+</tr>
+<tr>
+<td><code>--localmem</code></td>
+<td><code>--localmem=64</code></td>
+<td>最大内存 (GB)</td>
+</tr>
 </tbody>
 </table>
+<p><div class="language-pwsh highlight"><pre><span></span><code><span class="c"># 使用cellranger count进行定量</span>
+<span class="n">cellranger</span> <span class="n">count</span> <span class="p">\</span>
+  <span class="p">-</span><span class="n">-id</span><span class="p">=</span><span class="n">run_count_1kpbmcs</span> <span class="p">\</span>
+  <span class="p">-</span><span class="n">-fastqs</span><span class="p">=</span><span class="n">pbmc_1k_v3_fastqs</span> <span class="p">\</span>
+  <span class="p">-</span><span class="n">-sample</span><span class="p">=</span><span class="n">pbmc_1k_v3</span> <span class="p">\</span>
+  <span class="p">-</span><span class="n">-transcriptome</span><span class="p">=</span><span class="n">refdata-gex-GRCh38</span><span class="p">-</span><span class="n">2020-A</span> <span class="p">\</span>
+  <span class="p">-</span><span class="n">-create-bam</span><span class="p">=</span><span class="n">true</span> <span class="p">\</span>
+  <span class="p">-</span><span class="n">-localcores</span><span class="p">=</span><span class="n">16</span> <span class="p">\</span>
+  <span class="p">-</span><span class="n">-localmem</span><span class="p">=</span><span class="n">64</span>
+</code></pre></div>
+运行完成后输出的结果讲解。
+<div class="language-pwsh highlight"><pre><span></span><code><span class="err">├──</span> <span class="n">analysis</span>   <span class="c"># Cell Ranger 自动跑的 PCA、t-SNE、聚类、差异基因</span>
+<span class="err">├──</span> <span class="n">cloupe</span><span class="p">.</span><span class="n">cloupe</span> <span class="c"># 用 **Loupe Browser** 点选式看细胞分群、基因表达、差异基因的文件</span>
+<span class="err">├──</span> <span class="n">filtered_feature_bc_matrix</span> <span class="c"># 这个目录中的文件可以用于下游Seurat或Scanpy等软件使用</span>
+<span class="err">├──</span> <span class="n">filtered_feature_bc_matrix</span><span class="p">.</span><span class="n">h5</span> <span class="c"># **HDF5 版**表达矩阵，比 `mtx` 读取更快，占用更小</span>
+<span class="err">├──</span> <span class="n">metrics_summary</span><span class="p">.</span><span class="n">csv</span>
+<span class="err">├──</span> <span class="n">molecule_info</span><span class="p">.</span><span class="n">h5</span>  <span class="c"># **UMI 级别**信息</span>
+<span class="err">├──</span> <span class="n">possorted_genome_bam</span><span class="p">.</span><span class="n">bam</span> <span class="c"># 比对的BAM文件</span>
+<span class="err">├──</span> <span class="n">possorted_genome_bam</span><span class="p">.</span><span class="n">bam</span><span class="p">.</span><span class="n">bai</span> <span class="c"># 比对的BAM文件的索引文件</span>
+<span class="err">├──</span> <span class="n">raw_feature_bc_matrix</span> <span class="c"># 未过滤空液滴等指标的文件</span>
+<span class="err">├──</span> <span class="n">raw_feature_bc_matrix</span><span class="p">.</span><span class="n">h5</span>
+<span class="err">└──</span> <span class="n">web_summary</span><span class="p">.</span><span class="n">html</span> <span class="c"># web报告文件</span>
+</code></pre></div></p>
               
             </div>
           </div><footer>
