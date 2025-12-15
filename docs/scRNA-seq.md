@@ -118,3 +118,41 @@ tar -xvf pbmc_1k_v3_fastqs.tar
 | `L[泳道号]`   | 测序仪的泳道号（数字，如 L001、L002），多泳道数据需区分               | `L001`              |
 | `R[读段类型]` | 关键！区分不同读段：<br>R1：样本索引/条码读段（通常 8/10bp）<br>R2：基因表达读段（通常 98bp） | `R1` / `R2`         |
 | `001`         | 固定后缀（Illumina 标准，代表测序循环编号），不可修改                 | `001`               |
+cellranger count常用参数：
+| 参数                | 简写示例              | 作用                              |
+| ------------------- | --------------------- | --------------------------------- |
+| `--id`              | `--id=pbmc1k`         | 输出文件夹名（必填）              |
+| `--transcriptome`   | `--trans=/ref/GRCh38` | 参考索引路径（必填）              |
+| `--fastqs`          | `--fastqs=./fastq`    | fastq 所在目录（必填）            |
+| `--sample`          | `--sample=pbmc1k`     | 文件前缀，多 lane/多 Index 时必填 |
+| `--expect-cells`    | `--expect-cells=3000` | 预期细胞数，提高 calling 精度     |
+| `--force-cells`     | `--force-cells=3500`  | 强制细胞数，跳过自动 calling      |
+| `--include-introns` | 开关                  | snRNA-seq 核内信号需打开          |
+| `--localcores`      | `--localcores=16`     | 最大 CPU 数                       |
+| `--localmem`        | `--localmem=64`       | 最大内存 (GB)                     |
+
+```pwsh
+# 使用cellranger count进行定量
+cellranger count \
+  --id=run_count_1kpbmcs \
+  --fastqs=pbmc_1k_v3_fastqs \
+  --sample=pbmc_1k_v3 \
+  --transcriptome=refdata-gex-GRCh38-2020-A \
+  --create-bam=true \
+  --localcores=16 \
+  --localmem=64
+```
+运行完成后输出的结果讲解。
+```pwsh
+├── analysis   # Cell Ranger 自动跑的 PCA、t-SNE、聚类、差异基因
+├── cloupe.cloupe # 用 **Loupe Browser** 点选式看细胞分群、基因表达、差异基因的文件
+├── filtered_feature_bc_matrix # 这个目录中的文件可以用于下游Seurat或Scanpy等软件使用
+├── filtered_feature_bc_matrix.h5 # **HDF5 版**表达矩阵，比 `mtx` 读取更快，占用更小
+├── metrics_summary.csv
+├── molecule_info.h5  # **UMI 级别**信息
+├── possorted_genome_bam.bam # 比对的BAM文件
+├── possorted_genome_bam.bam.bai # 比对的BAM文件的索引文件
+├── raw_feature_bc_matrix # 未过滤空液滴等指标的文件
+├── raw_feature_bc_matrix.h5
+└── web_summary.html # web报告文件
+```
