@@ -1,0 +1,95 @@
+.md-typeset {
+  line-height: 1.6; /* 行高更舒展 */
+  letter-spacing: 0.02em; /* 字间距更易读 */
+}
+.md-typeset h2, .md-typeset h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  color: #ff9800; /* 标题用amber系颜色 */
+}
+/* 侧边栏当前章节高亮 */
+.md-nav__item--active > .md-nav__link {
+  color: #ff5722 !important;
+  font-weight: bold;
+}
+
+/* 表格样式优化 */
+.md-typeset table:not([class]) {
+  background-color: #fff; /* 表格白底 */
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.md-typeset table:not([class]) th {
+  background-color: #fff9e6; /* 表头浅黄色（和代码块呼应） */
+  font-weight: bold;
+}
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+  border: 1px solid #eee;
+  padding: 0.8em 1em;
+}
+
+/* 表格奇偶行交替底色（提升阅读效率） */
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: #fff9e6; /* 偶数行浅黄色 */
+}
+/* 表格悬停高亮 */
+.md-typeset table:not([class]) tr:hover {
+  background-color: #fff3cd !important;
+}
+/* 表头文字加粗+颜色区分 */
+.md-typeset table:not([class]) th {
+  font-weight: 600;
+  color: #e67e22;
+  border-bottom: 2px solid #ffc107;
+}
+/* 表格内容自动换行（避免文字溢出） */
+.md-typeset table:not([class]) td {
+  white-space: normal !important;
+}
+
+/* 一级标题（如章节大标题） */
+.md-typeset h1 {
+  color: #ff9800;
+  font-size: 1.8em;
+  border-left: 4px solid #ffc107;
+  padding-left: 0.8em;
+  margin-bottom: 1em;
+}
+/* 二级标题（如表格标题） */
+.md-typeset h2 {
+  color: #f57c00;
+  font-size: 1.4em;
+  margin-top: 2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #ffe0b2;
+}
+/* 超链接样式优化 */
+.md-typeset a {
+  color: #f57c00;
+  text-decoration: none;
+  border-bottom: 1px dashed #f57c00;
+}
+.md-typeset a:hover {
+  border-bottom: 1px solid #f57c00;
+} 
+
+/* 侧边栏当前章节高亮（更醒目） */
+.md-nav__item--active > .md-nav__link {
+  background-color: #fff9e6;
+  padding-left: 0.5em;
+  border-left: 3px solid #ff9800;
+}
+.md-search__form {
+  background-color: rgba(255,255,255,0.3) !important;
+  border-radius: 4px;
+}
+.md-search__input {
+  color: #333 !important;
+}
+/* 全局圆角样式 */
+.md-header, .md-search__form, .md-typeset table:not([class]), 
+.md-typeset code, .md-nav__item--active > .md-nav__link {
+  border-radius: 6px;
+}
