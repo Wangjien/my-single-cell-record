@@ -18,9 +18,19 @@ nav:
   - scATAC-seq: scATAC-seq.md
   - 空转: 空转.md
 
-theme: readthedocs
+theme: 
+  name: material
+  features:
+    - content.code.copy  # 代码块右侧显示“复制”按钮
+  palette:
+    # 主色调（primary）可选：indigo、blue、red、green、amber等
+    primary: amber
+    # 强调色（accent）可选：indigo、blue、red等
+    accent: red
+    # 深色模式（可选）
+    scheme: slate  # 切换为深色主题
 extra_css:
-  - custom.css
+  - css/custom.css  # 如果有自定义 CSS 文件，可以添加路径
 
 # 补充：开启目录折叠（readthedocs 主题支持）
 markdown_extensions:

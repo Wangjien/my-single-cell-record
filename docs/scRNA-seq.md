@@ -5,16 +5,16 @@
 
 # 10X 分析工具CellRanger学习
 
-## cellranger count
+## 1. cellranger count
 
 官方教程：https://www.10xgenomics.com/support/software/cell-ranger/latest/tutorials/cr-tutorial-ct
 
 `cellranger count` 是 10x Genomics 官方用于**单细胞 RNA-seq（scRNA-seq）数据定量分析**的核心命令，主要功能是将单细胞测序的原始 fastq 文件与参考基因组比对，生成细胞级别的基因表达矩阵。
 
-### cellranger count下载和安装
+### 1.1 cellranger count下载和安装
 
 目前的cellranger版本已经更新到了Cell Ranger 10.0.0 (Nov 13, 2025)，如果需要下载历史版本，可以通过访问[https://www.10xgenomics.com/support/software/cell-ranger/downloads/previous-versions](https://www.10xgenomics.com/support/software/cell-ranger/downloads/previous-versions)进行下载。**参考数据整体比较大，如果服务器下载速度过慢，也可以本地下载，并上传至服务器。**
-### Cell Ranger 各版本核心变化对比表（v7.0.0 至 v10.0.0）
+### 1.2 Cell Ranger 各版本核心变化对比表（v7.0.0 至 v10.0.0）
 | 版本       | 发布时间   | 核心功能/优化                                                                 | 兼容性/支持要求                                                                 |
 |------------|------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
 | **v10.0.0** | 2025-05    | 1. 新增“多组学联合聚类”功能，整合基因表达、ATAC、蛋白数据联合分析2. 支持Gem-X Ultra芯片及8-plex高 multiplexing 文库3. 优化CRISPR筛选富集分析，提升基因效应量化精度4. UMAP降维速度较v9提升40%，大样本分析效率显著提升5. web summary新增“多组学关联视图” | 1. 支持2025-A版参考基因组（GRCh38/GRCm39注释更新）2. 兼容PTG抗体v2版蛋白文库3. 系统要求：Python 3.11+，CPU支持AVX2，内存≥64GB（100k细胞）4. 兼容Illumina NovaSeq X Plus最新数据 |
@@ -50,11 +50,11 @@ cellranger --version
 ```
 
 
-### cellranger count使用的参考文件下载
+### 1.3 cellranger count使用的参考文件下载
 
 目前cellranger count使用的参数文件也做了更新，目前的版本为:2024-A，历史版本为：2020-A（[https://www.10xgenomics.com/support/software/cell-ranger/latest/release-notes/cr-reference-release-notes#2020-a](https://www.10xgenomics.com/support/software/cell-ranger/latest/release-notes/cr-reference-release-notes#2020-a)）。
 
-*<font color="red"> Human reference (GRCh38) - 2024-A</font>
+<font color="red"> Human reference (GRCh38) - 2024-A</font>
 
 ```pwsh
 # wget 下载
@@ -68,6 +68,7 @@ tar -xzf refdata-gex-GRCh38-2024-A.tar.gz
 解压后的文件目录中包括如下的文件
 ![](./imgs/huamn_cellranger_ref.png)
 ![human](./imgs/huamn_cellranger_ref2.png)
+
 * Mouse reference (GRCm39) - 2024-A
 
 ```pwsh
@@ -91,7 +92,7 @@ curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-mRatBN7-2-2024-A.t
 # 选择一种下载方式，下载成功后解压文件
 tar -xzf refdata-gex-mRatBN7-2-2024-A.tar.gz
 ```
-### cellranger count使用
+### 1.4 cellranger count使用
 <font color="blue"> 这里使用cellranger官方提供的示例数据，数据下载地址[https://www.10xgenomics.com/support/software/cell-ranger/8.0/tutorials/cr-tutorial-ct](https://www.10xgenomics.com/support/software/cell-ranger/8.0/tutorials/cr-tutorial-ct) </font>
 ```pwsh
 mkdir run_cellranger_count && cd run_cellranger_count
@@ -159,9 +160,9 @@ cellranger count \
 └── web_summary.html # web报告文件
 ```
 
-## 数据格式转换
-### 不同格式数据生成Seurat对象数据
-### 不同格式数据生成Anndata对象数据
+## 2 数据格式转换
+### 2.1 不同格式数据生成Seurat对象数据
+### 2.2 不同格式数据生成Anndata对象数据
 
 
 
