@@ -19,6 +19,8 @@ nav:
   - 空转: 空转.md
 
 theme: readthedocs
+extra_css:
+  - custom.css
 
 # 补充：开启目录折叠（readthedocs 主题支持）
 markdown_extensions:

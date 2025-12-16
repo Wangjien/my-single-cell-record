@@ -1,0 +1,24 @@
+/* custom.css */
+
+.wy-nav-content {
+    max-width: 90% !important;
+}
+
+/* 修改多行代码块的背景颜色 */
+.rst-content pre.literal-block,
+.rst-content div[class^="highlight"] pre,
+.rst-content .highlight {
+    /* 使用从图片中提取的颜色 */
+    background-color: #eef5ce !important; 
+    
+    /* 可选：如果你想去掉默认的灰色边框，取消下面这行的注释 */
+    /* border: none !important; */
+    
+    /* 可选：为了保持良好的对比度，你可能需要调整文字颜色 */
+    /* color: #333 !important; */
+}
+
+/* 如果你也想修改行内代码（如正文中的 `cellranger count`）的背景色，添加以下代码 */
+.rst-content code, .rst-content tt {
+    /* background-color: #eef5ce !important; */
+}
