@@ -390,6 +390,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 去批次聚类分群
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 去批次聚类分群">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 单细胞去批次与整合算法对比表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -643,6 +671,34 @@
     <span class="md-ellipsis">
       
         2.2 不同格式数据生成Anndata对象数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 去批次聚类分群
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 去批次聚类分群">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 单细胞去批次与整合算法对比表
       
     </span>
   </a>
@@ -981,6 +1037,45 @@
 <h2 id="2">2 数据格式转换<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <h3 id="21-seurat">2.1 不同格式数据生成Seurat对象数据<a class="headerlink" href="#21-seurat" title="Permanent link">&para;</a></h3>
 <h3 id="22-anndata">2.2 不同格式数据生成Anndata对象数据<a class="headerlink" href="#22-anndata" title="Permanent link">&para;</a></h3>
+<h2 id="3">3 去批次聚类分群<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>好的，根据您的要求，我已将这些单细胞算法的对比整理为 Markdown 表格形式：</p>
+<h3 id="31">3.1 单细胞去批次与整合算法对比表<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>优势</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Harmony</strong></td>
+<td>速度极快，内存占用低，效果稳健</td>
+<td>大多数常规 scRNA-seq 整合的首选</td>
+</tr>
+<tr>
+<td><strong>Seurat CCA</strong></td>
+<td>准确度高，与 Seurat 生态深度集成</td>
+<td>批次较少、生物学差异较细微的情况</td>
+</tr>
+<tr>
+<td><strong>scVI</strong></td>
+<td>非线性建模能力强，支持海量数据</td>
+<td>数十万级以上细胞量，或复杂批次效应</td>
+</tr>
+<tr>
+<td><strong>LIGER</strong></td>
+<td>擅长多组学整合</td>
+<td>转录组与 ATAC-seq 或蛋白组联用</td>
+</tr>
+<tr>
+<td><strong>BBKNN</strong></td>
+<td>计算开销极小</td>
+<td>快速预览结果或极大型图构建</td>
+</tr>
+</tbody>
+</table>
 <h2 id="_1">其他分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="hlaarcashla">单细胞HLA分析之arcasHLA<a class="headerlink" href="#hlaarcashla" title="Permanent link">&para;</a></h3>
 <h3 id="hlaschlacount">单细胞HLA分析之scHLAcount<a class="headerlink" href="#hlaschlacount" title="Permanent link">&para;</a></h3>
