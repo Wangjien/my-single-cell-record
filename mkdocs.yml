@@ -17,6 +17,7 @@ nav:
   - scRNA-seq: scRNA-seq.md
   - scATAC-seq: scATAC-seq.md
   - 空转: 空转.md
+  - 生信算法学习记录: 生信算法学习记录.md
 
 theme: 
   name: material
