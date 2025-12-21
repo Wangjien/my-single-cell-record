@@ -1108,6 +1108,21 @@ $$min_{R,Y} \sum_{i,k} R_{ki} ||Z_i - Y_k||^2 + \sigma R_{ki} \log R_{ki} + \sig
 在这一公式中，$Z_i$ 是细胞的特征向量，$Y_k$ 是簇质心，$\sigma$ 控制聚类的“平滑度”，而 $\theta$ 是关键的多样性惩罚参数 1。$O_{ki}$ 代表细胞在簇和批次中的观察共现频率，而 $E_{ki}$ 代表独立性假设下的预期频率 。当某个簇过度由单一批次的细胞占据时，惩罚项会显著增加，从而迫使算法寻找能够整合多个数据集的特征组合 。</p>
 <p>为了防止过度校正（Overcorrection），Harmony 采用了岭回归（Ridge Regression）惩罚项 $\lambda$ 。$\lambda$ 的存在确保了校正因子的估计是稳健的，特别是在某些批次中细胞数量极少的情况下 16。每个细胞最终接收到的校正量是其所属所有簇校正向量的加权平均值 。Harmony 采用线性模型，优点是解释性强、计算极其快速、且不容易产生虚假的过拟合；而 scVI 采用非线性模型，能够处理极其强烈的非线性批次效应，但对小样本数据可能过于敏感 。
 <img alt="alt text" src="../imgs/image.png" /></p>
+<p><img alt="" src="../imgs/image%20copy.png" />
+步骤 a：模糊聚类（Soft assign cells to clusters）</p>
+<p>把所有细胞软分配到多个聚类中（不是 “非此即彼” 的硬分配），同时通过惩罚项，让每个聚类内尽可能包含不同数据集的细胞（保证聚类的 “跨批次多样性”）。
+图 a 中能看到：不同颜色（数据集）的细胞被分到了同一个聚类里（比如 Cluster 1 包含多种颜色）。
+步骤 b：计算聚类中心（Get cluster centroids）</p>
+<p>对每个聚类，计算全局中心（整个聚类的中心），同时计算该聚类在每个数据集下的中心（批次特异性中心）。
+图 b 中能看到：每个聚类（如 Cluster 1）出现了 “全局中心” 和 “不同颜色对应的批次中心”。
+步骤 c：计算校正因子（Get dataset correction factors）</p>
+<p>在每个聚类内，根据 “全局中心” 和 “批次中心” 的差异，计算每个数据集的校正因子（用于消除该批次在这个聚类中的偏移）。
+图 c 中箭头表示：不同数据集的细胞会向全局中心的方向被校正。
+步骤 d：校正细胞位置（Move cells based on soft cluster membership）</p>
+<p>利用步骤 a 中细胞的 “软聚类分配权重”，对每个细胞应用多个聚类校正因子的线性组合（因为细胞被分配到多个聚类），最终调整细胞的位置。
+图 d 中能看到：同一细胞类型（同形状）的不同颜色（不同数据集）细胞，位置更聚集了（批次效应被校正）。
+核心逻辑</p>
+<p>Harmony 通过 “模糊聚类→计算中心→算校正因子→校正细胞” 的迭代，逐渐削弱 “聚类分配” 与 “数据集（批次）” 的关联，最终让相同细胞类型（同形状）的细胞，不管来自哪个数据集（什么颜色），都能聚在一起（消除批次效应）。</p>
 <h4 id="seurat4harmony">Seurat4中harmony的用法<a class="headerlink" href="#seurat4harmony" title="Permanent link">&para;</a></h4>
 <h2 id="_1">其他分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="hlaarcashla">单细胞HLA分析之arcasHLA<a class="headerlink" href="#hlaarcashla" title="Permanent link">&para;</a></h3>
