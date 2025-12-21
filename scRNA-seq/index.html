@@ -412,6 +412,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#32-harmony" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 harmony算法
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -699,6 +710,17 @@
     <span class="md-ellipsis">
       
         3.1 单细胞去批次与整合算法对比表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-harmony" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 harmony算法
       
     </span>
   </a>
@@ -1076,6 +1098,17 @@
 </tr>
 </tbody>
 </table>
+<h3 id="32-harmony">3.2 harmony算法<a class="headerlink" href="#32-harmony" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="../imgs/harmony%E7%AE%97%E6%B3%95.png" />
+Harmony 并非直接修改原始的基因表达矩阵，而是作用于低维空间，如主成分分析（PCA）生成的嵌入坐标 。这种设计不仅极大提高了计算效率，还避免了由于直接修改计数数据而可能引入的分布扭曲 。Harmony 的核心逻辑是一个迭代过程，主要包括四个关键步骤：软聚类（Soft Clustering）、计算全局与批次质心、学习线性校正因子以及细胞特异性调整 。这些步骤共同作用，使得 Harmony 能够有效地去除批次效应，同时保留生物变异。</p>
+<p>Harmony 的主要优点包括：
+- <strong>速度极快</strong>：Harmony 的计算速度非常快，能够处理数百万个细胞的数据。
+- <strong>内存占用低</strong>：Harmony 的内存占用相对较低，适合在内存有限的计算环境中运行。
+$$min_{R,Y} \sum_{i,k} R_{ki} ||Z_i - Y_k||^2 + \sigma R_{ki} \log R_{ki} + \sigma \theta R_{ki} \log\left(\frac{O_{ki}}{E_{ki}}\right)\phi_i$$
+在这一公式中，$Z_i$ 是细胞的特征向量，$Y_k$ 是簇质心，$\sigma$ 控制聚类的“平滑度”，而 $\theta$ 是关键的多样性惩罚参数 1。$O_{ki}$ 代表细胞在簇和批次中的观察共现频率，而 $E_{ki}$ 代表独立性假设下的预期频率 。当某个簇过度由单一批次的细胞占据时，惩罚项会显著增加，从而迫使算法寻找能够整合多个数据集的特征组合 。</p>
+<p>为了防止过度校正（Overcorrection），Harmony 采用了岭回归（Ridge Regression）惩罚项 $\lambda$ 。$\lambda$ 的存在确保了校正因子的估计是稳健的，特别是在某些批次中细胞数量极少的情况下 16。每个细胞最终接收到的校正量是其所属所有簇校正向量的加权平均值 。Harmony 采用线性模型，优点是解释性强、计算极其快速、且不容易产生虚假的过拟合；而 scVI 采用非线性模型，能够处理极其强烈的非线性批次效应，但对小样本数据可能过于敏感 。
+<img alt="alt text" src="../imgs/image.png" /></p>
+<h4 id="seurat4harmony">Seurat4中harmony的用法<a class="headerlink" href="#seurat4harmony" title="Permanent link">&para;</a></h4>
 <h2 id="_1">其他分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="hlaarcashla">单细胞HLA分析之arcasHLA<a class="headerlink" href="#hlaarcashla" title="Permanent link">&para;</a></h3>
 <h3 id="hlaschlacount">单细胞HLA分析之scHLAcount<a class="headerlink" href="#hlaschlacount" title="Permanent link">&para;</a></h3>
